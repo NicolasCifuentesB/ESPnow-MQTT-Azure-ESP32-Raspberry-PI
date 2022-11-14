@@ -1,5 +1,6 @@
 import network, espnow, dht11
 from machine import Pin
+from time import sleep
 
 # A WLAN interface must be active to send()/recv()
 sta = network.WLAN(network.STA_IF)  # Or network.AP_IF
@@ -18,6 +19,7 @@ for i in range(100):
         sensor.measure()
         print(sensor.temperature())
         e.send(peer, str(sensor.temperature()), True)
+        sleep(2)
     except OSError as e :
         e.send(b'ERROR DE CENSADO')
 e.send(b'end')
