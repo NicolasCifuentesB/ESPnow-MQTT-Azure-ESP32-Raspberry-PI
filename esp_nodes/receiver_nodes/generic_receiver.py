@@ -1,5 +1,4 @@
-import network
-import espnow
+import network, espnow
 
 # A WLAN interface must be active to send()/recv()
 sta = network.WLAN(network.STA_IF)
@@ -11,7 +10,7 @@ e.active(True)
 while True :
     host, msg = e.recv()
     if msg:             # msg == None if timeout in recv()
-        print(host, msg)
+        print(host,msg)
         if msg == b'end':
             print('DONE')
             break
