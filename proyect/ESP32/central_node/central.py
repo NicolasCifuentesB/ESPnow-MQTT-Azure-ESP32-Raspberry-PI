@@ -10,7 +10,7 @@ e = espnow.ESPNow()
 e.active(True)
 
 SERVER = '192.168.131.38'  # MQTT SERVER ADDRESS (raspberry)
-CLIENT_ID = 'ESP32_DHT'
+CLIENT_ID = 'ESP32'
 TOPIC_TEMP = b'temperature'
 TOPIC_HYGRO = b'hygrometry'
 TOPIC_LDR = b'luminosity'

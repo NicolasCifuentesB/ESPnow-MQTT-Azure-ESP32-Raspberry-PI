@@ -35,7 +35,9 @@ def query(table, value, cursor, conexion):
 
 def on_connect(client, userdata, flags, rc):
     print('Se conecto con mqtt'+str(rc))
-    client.subscribe('temp_humidity')
+    client.subscribe('temperature')
+    client.subscribe('luminosity')
+    client.subscribe('hygrometry')
 
 
 def on_message(client, userdata, msg):
