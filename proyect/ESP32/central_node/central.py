@@ -15,7 +15,7 @@ TOPIC_TEMP = b'temperature'
 TOPIC_HYGRO = b'hygrometry'
 TOPIC_LDR = b'luminosity'
 
-client = MQTTClient(CLIENT_ID, SERVER)
+client = MQTTClient(CLIENT_ID, SERVER, keepalive=30)
 client.connect()
 
 while True:
@@ -25,10 +25,10 @@ while True:
         if msg == b'end':
             print('DONE')
             break
-        elif host == b'dht sender mac':
+        elif host == b'\x08:\xf2\x8e\xee\\':
             print('Temperature: {}'.format(msg.decode()))
             client.publish(TOPIC_TEMP, msg)
-        elif host == b'ldr sender mac':
+        elif host == b'\x84\xcc\xa8d\xfd\xd8':
             print('Luminosity: {}'.format(msg.decode()))
             client.publish(TOPIC_LDR, msg)
         elif host == b'hygrometer sender mac':

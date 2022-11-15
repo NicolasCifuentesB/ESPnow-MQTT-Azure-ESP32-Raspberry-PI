@@ -6,7 +6,7 @@ from azure.iot.device import IoTHubDeviceClient, Message
 
 def iothub_client_init():
     # Create an IoT Hub client
-    CONNECTION_STRING = "HostName=axuregateway.azure-devices.net;DeviceId=raspberrypi;SharedAccessKey=S0eftETEH4qSETiEcHlsVokurlESI3NCkBhQgT/drck="
+    CONNECTION_STRING = "HostName=iot-redes.azure-devices.net;DeviceId=proyecto;SharedAccessKey=wyfpIyoYF77Wpri5tYeM7nOl+W7k+zyzaVJ9f5KFO34="
     client = IoTHubDeviceClient.create_from_connection_string(
         CONNECTION_STRING)
     return client
