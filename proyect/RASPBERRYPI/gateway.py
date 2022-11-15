@@ -7,14 +7,16 @@ from azure.iot.device import IoTHubDeviceClient, Message
 def iothub_client_init():
     # Create an IoT Hub client
     CONNECTION_STRING = "HostName=axuregateway.azure-devices.net;DeviceId=raspberrypi;SharedAccessKey=S0eftETEH4qSETiEcHlsVokurlESI3NCkBhQgT/drck="
-    client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
+    client = IoTHubDeviceClient.create_from_connection_string(
+        CONNECTION_STRING)
     return client
 
 
 def azure_upload(table, value, azure_client):
 
     try:
-        message_json = '{{"From": "Esp32-Pi","To": "Azure",{}: {}}'.format(table, value)
+        message_json = '{{"From": "Esp32-Pi","To": "Azure",{}: {}}'.format(
+            table, value)
         message = Message(message_json)
         print("Sending message: {}".format(message))
         azure_client.send_message(message)
@@ -73,7 +75,7 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect('192.168.227.195', 1883, 60)
+client.connect('192.168.131.38', 1883, 60)
 
 client.loop_forever()
 
