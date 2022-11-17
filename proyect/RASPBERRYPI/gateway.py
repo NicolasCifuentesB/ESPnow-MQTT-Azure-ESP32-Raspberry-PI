@@ -31,7 +31,7 @@ def query(table, column, value, cursor, conexion):
     print('insert into {} (time,{}) values ({},{});'.format(
         table, column, now, value))
     cursor.execute(
-        'insert into {} (time,{}) values ({},{});'.format(table, column, now, value))
+        'insert into {} (time,{}) values ({},{});'.format(table, column, str(now), value))
     conexion.commit()
 
 
