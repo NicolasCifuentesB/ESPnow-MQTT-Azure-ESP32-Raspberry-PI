@@ -30,7 +30,7 @@ def query(table, value, cursor, conexion):
     now = datetime.datetime.now()
     print('{}\n{}\n{}'.format(table, now, value))
     cursor.execute(
-        f'insert into {0} (time,temperature) values (?,?);', (table, now, value))
+        'insert into {} (time,temperature) values ({},{});'.format(table, now, value))
     conexion.commit()
 
 
