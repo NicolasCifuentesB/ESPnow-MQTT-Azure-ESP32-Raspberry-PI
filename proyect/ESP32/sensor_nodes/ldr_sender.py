@@ -7,7 +7,7 @@ SERVER = '192.168.131.38'  # MQTT SERVER ADDRESS (raspberry)
 CLIENT_ID = 'LDR'
 TOPIC = b'luminosity'
 
-client = MQTTClient(CLIENT_ID, SERVER)  # keepalive=30
+client = MQTTClient(CLIENT_ID, SERVER, keepalive=30)
 client.connect()
 
 #ldr = ADC(Pin(34))
