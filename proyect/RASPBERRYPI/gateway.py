@@ -28,10 +28,10 @@ def azure_upload(table, value, azure_client):
 
 def query(table, column, value, cursor, conexion):
     now = datetime.datetime.now()
-    print('insert into {} (time,{}) values (datetime({}),{});'.format(
+    print('insert into {} (register_time,{}) values ({},{});'.format(
         table, column, now, value))
     cursor.execute(
-        'insert into {} (time,{}) values ({},{});'.format(table, column, str(now), value))
+        'insert into {} (register_time,{}) values ({},{});'.format(table, column, str(now), value))
     conexion.commit()
 
 
@@ -67,11 +67,11 @@ cursor = conexion.cursor()
 
 try:
     cursor.execute('''create table Temperature(id integer primary key autoincrement,
-    time timestamp not null,temperature float not null);''')
+    register_time timestamp not null,temperature float not null);''')
     cursor.execute('''create table Luminosity(id integer primary key autoincrement,
-    time timestamp not null,luminosity float not null);''')
+    register_time timestamp not null,luminosity float not null);''')
     cursor.execute('''create table Hygrometry(id integer primary key autoincrement,
-    time timestamp not null,hygrometry float not null);''')
+    register_time timestamp not null,hygrometry float not null);''')
     print('Se creo la base de datos')
 except:
     print('Ya existe la base de datos')
