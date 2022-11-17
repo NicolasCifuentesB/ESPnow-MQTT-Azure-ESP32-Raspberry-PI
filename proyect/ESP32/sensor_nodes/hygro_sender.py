@@ -14,6 +14,6 @@ hym = ADC(Pin(34))
 hym.atten(ADC.ATTN_11DB)
 
 while True:
-    sensor.measure()
+    msg = (b'{0:3.1f}'.format(hym.value()))
     print('Hygrometry: {}'.format(hym.value()))
-    client.publish(TOPIC, hym.value())
+    client.publish(TOPIC, msg)

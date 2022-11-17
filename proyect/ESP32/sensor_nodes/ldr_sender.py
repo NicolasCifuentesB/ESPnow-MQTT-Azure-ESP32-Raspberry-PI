@@ -10,10 +10,11 @@ TOPIC = b'luminosity'
 client = MQTTClient(CLIENT_ID, SERVER)  # keepalive=30
 client.connect()
 
-ldr = ADC(Pin(34))
-ldr.atten(ADC.ATTN_11DB)
+#ldr = ADC(Pin(34))
+# ldr.atten(ADC.ATTN_11DB)
+ldr = Pin(15, Pin.IN)
 
 while True:
-    sensor.measure()
+    msg = (b'{0:3.1f}'.format(ldr.value()))
     print('Luminosity: {}'.format(ldr.value()))
-    client.publish(TOPIC, ldr.value())
+    client.publish(TOPIC, msg)
