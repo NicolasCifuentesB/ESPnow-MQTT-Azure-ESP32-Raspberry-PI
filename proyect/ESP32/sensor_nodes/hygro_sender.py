@@ -1,25 +1,19 @@
-import network, espnow, dht11
+import network
 from machine import Pin, ADC
 from time import sleep
+from umqtt.simple import MQTTClient
 
-# A WLAN interface must be active to send()/recv()
-sta = network.WLAN(network.STA_IF)  # Or network.AP_IF
-sta.active(True)
+SERVER = '192.168.131.38'  # MQTT SERVER ADDRESS (raspberry)
+CLIENT_ID = 'HYM'
+TOPIC = b'hygrometry'
 
-e = espnow.ESPNow()
-e.active(True)
-peer = b'\x08:\xf2\xb9\xa6\x0c'   # MAC address of peer's wifi interface
-e.add_peer(peer)
+client = MQTTClient(CLIENT_ID, SERVER)  # keepalive=30
+client.connect()
 
-hygrometer = ADC(Pin(33))
-hygrometer.atten(ADC.ATTN_11DB)
+hym = ADC(Pin(34))
+hym.atten(ADC.ATTN_11DB)
 
-e.send("Starting...")       # Send to all peers
-for i in range(100):
-    try :
-        print(hygrometer.read())
-        e.send(peer, str(hygrometer.read()), True)
-        sleep(2)
-    except OSError as e :
-        e.send(b'ERROR DE CENSADO')
-e.send(b'end')
+while True:
+    sensor.measure()
+    print('Hygrometry: {}'.format(hym.value()))
+    client.publish(TOPIC, hym.value())
