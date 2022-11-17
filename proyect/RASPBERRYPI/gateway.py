@@ -15,7 +15,7 @@ def iothub_client_init():
 def azure_upload(table, value, azure_client):
 
     try:
-        message_json = '{{"From": "Esp32-Pi","To": "Azure",{}: {}}'.format(
+        message_json = '{{"From": "Esp32-Pi","To": "Azure",{}: {}}}'.format(
             table, value)
         message = Message(message_json)
         print("Sending message: {}".format(message))
