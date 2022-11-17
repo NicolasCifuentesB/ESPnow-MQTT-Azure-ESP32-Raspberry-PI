@@ -26,11 +26,11 @@ def azure_upload(table, value, azure_client):
         print("Some stop")
 
 
-def query(table, value, cursor, conexion):
+def query(table, column, value, cursor, conexion):
     now = datetime.datetime.now()
     print('{}\n{}\n{}'.format(table, now, value))
     cursor.execute(
-        'insert into {} (time,temperature) values ({},{});'.format(table, now, value))
+        'insert into {} (time,{}) values ({},{});'.format(table, column, now, value))
     conexion.commit()
 
 
@@ -45,17 +45,18 @@ def on_message(client, userdata, msg):
     if msg.topic == 'temperature':
         temperature = str((msg.payload.decode()))
         print(f'Temperatura: {temperature} °C')
-        query('Temperature', float(temperature), cursor, conexion)
+        query('Temperature', 'temperature', float(
+            temperature), cursor, conexion)
         azure_upload(temperature, float(temperature), azure_client)
     elif msg.topic == 'luminosity':
         luminosity = str((msg.payload.decode()))
         print(f'Luminosidad: {luminosity}')
-        query('Luminosity', float(luminosity), cursor, conexion)
+        query('Luminosity', 'luminosity', float(luminosity), cursor, conexion)
         azure_upload(luminosity, float(luminosity), azure_client)
     elif msg.topic == 'hygrometry':
         hygrometry = str((msg.payload.decode()))
         print(f'Hygrometry: {hygrometry} %')
-        query('Hygrometry', float(hygrometry), cursor, conexion)
+        query('Hygrometry', 'hygrometry', float(hygrometry), cursor, conexion)
         azure_upload(hygrometry, float(hygrometry), azure_client)
 
 
