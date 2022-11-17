@@ -28,7 +28,7 @@ def azure_upload(table, value, azure_client):
 
 def query(table, column, value, cursor, conexion):
     now = datetime.datetime.now()
-    print('insert into {} (time,{}) values ({},{});'.format(
+    print('insert into {} (time,{}) values (datetime({}),{});'.format(
         table, column, now, value))
     cursor.execute(
         'insert into {} (time,{}) values ({},{});'.format(table, column, str(now), value))
