@@ -48,17 +48,17 @@ def on_message(client, userdata, msg):
         print(f'Temperatura: {temperature} °C')
         query('Temperature', 'temperature', float(
             temperature), cursor, conexion)
-        azure_upload(temperature, float(temperature), azure_client)
+        azure_upload('Temperature', float(temperature), azure_client)
     elif msg.topic == 'luminosity':
         luminosity = str((msg.payload.decode()))
         print(f'Luminosidad: {luminosity}')
         query('Luminosity', 'luminosity', float(luminosity), cursor, conexion)
-        azure_upload(luminosity, float(luminosity), azure_client)
+        azure_upload('Luminosity', float(luminosity), azure_client)
     elif msg.topic == 'hygrometry':
         hygrometry = str((msg.payload.decode()))
         print(f'Hygrometry: {hygrometry} %')
         query('Hygrometry', 'hygrometry', float(hygrometry), cursor, conexion)
-        azure_upload(hygrometry, float(hygrometry), azure_client)
+        azure_upload('Hygrometry', float(hygrometry), azure_client)
 
 
 azure_client = iothub_client_init()
