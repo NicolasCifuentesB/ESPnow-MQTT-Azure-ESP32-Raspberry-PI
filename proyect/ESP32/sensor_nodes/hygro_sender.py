@@ -11,9 +11,15 @@ client = MQTTClient(CLIENT_ID, SERVER, keepalive=30)
 client.connect()
 
 hym = ADC(Pin(34))
+relehym = Pin(26, Pin.OUT)
 hym.atten(ADC.ATTN_11DB)
 
 while True:
-    msg = (b'{0:3.1f}'.format(hym.value()))
-    print('Hygrometry: {}'.format(hym.value()))
+    msg = (b'{0:3.1f}'.format(hym.read()))
+    print('Hygrometry: {}'.format(hym.read()))
     client.publish(TOPIC, msg)
+
+    if hym.read() <= 4095 and hym.read() > 3000:
+        relehym.value(1)
+    else:
+        relehym.value(0)
