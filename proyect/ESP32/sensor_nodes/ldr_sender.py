@@ -10,15 +10,10 @@ TOPIC = b'luminosity'
 client = MQTTClient(CLIENT_ID, SERVER, keepalive=30)
 client.connect()
 
-ldr = ADC(Pin(34))
-ldr.atten(ADC.ATTN_11DB)
-releldr = Pin(26, Pin.OUT)
+ldr = Pin(15)
 
 while True:
     msg = (b'{0:3.1f}'.format(ldr.value()))
     print('Luminosity: {}'.format(ldr.value()))
     client.publish(TOPIC, msg)
-    if hym.read() <= 4095 and hym.read() > 3000:
-        releldr.value(1)
-    else:
-        releldr.value(0)
+    sleep(2)

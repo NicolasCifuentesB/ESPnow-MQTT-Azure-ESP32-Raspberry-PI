@@ -23,3 +23,4 @@ while True:
         relehym.value(1)
     else:
         relehym.value(0)
+    sleep(2)

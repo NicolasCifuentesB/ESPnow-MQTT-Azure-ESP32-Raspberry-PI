@@ -12,9 +12,16 @@ client = MQTTClient(CLIENT_ID, SERVER, keepalive=30)  #
 client.connect()
 
 sensor = dht.DHT11(Pin(15))
+reletemp = Pin(26, Pin.OUT)
 
 while True:
     sensor.measure()
-    msg = (b'{0:3.1f}'.format(sensor.temperature()))
-    print('Temperature: {}'.format(sensor.temperature()))
+    temp = sensor.temperature()
+    msg = (b'{0:3.1f}'.format(temp))
+    print('Temperature: {}'.format(temp))
     client.publish(TOPIC, msg)
+    if temp <= 20 and hym.read() > 5:
+        reletemp.value(1)
+    else:
+        reletemp.value(0)
+    sleep(2)
