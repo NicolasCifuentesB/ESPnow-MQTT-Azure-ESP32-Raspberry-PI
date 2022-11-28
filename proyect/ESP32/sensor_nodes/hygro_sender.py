@@ -3,7 +3,7 @@ from machine import Pin, ADC
 from time import sleep
 from umqtt.simple import MQTTClient
 
-SERVER = '192.168.131.38'  # MQTT SERVER ADDRESS (raspberry)
+SERVER = '192.168.178.38'  # MQTT SERVER ADDRESS (raspberry)
 CLIENT_ID = 'HYM'
 TOPIC = b'hygrometry'
 
