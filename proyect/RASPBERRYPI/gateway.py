@@ -16,7 +16,7 @@ def azure_upload(table, value, azure_client):
 
     try:
         message_json = '{{"From": "Esp32-Pi","To": "Azure",{}: {}}}'.format(
-            table, value)
+            str(table), value)
         message = Message(message_json)
         print("Sending message: {}".format(message))
         azure_client.send_message(message)

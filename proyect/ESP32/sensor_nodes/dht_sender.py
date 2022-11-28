@@ -11,7 +11,7 @@ TOPIC = b'temperature'
 client = MQTTClient(CLIENT_ID, SERVER, keepalive=30)  #
 client.connect()
 
-sensor = dht.DHT11(Pin(15))
+sensor = dht.DHT11(Pin(2))
 reletemp = Pin(26, Pin.OUT)
 
 while True:

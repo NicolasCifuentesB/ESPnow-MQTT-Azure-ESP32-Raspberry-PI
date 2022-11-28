@@ -19,7 +19,7 @@ while True:
     print('Hygrometry: {}'.format(hym.read()))
     client.publish(TOPIC, msg)
 
-    if hym.read() <= 4095 and hym.read() > 3000:
+    if hym.read() <= 1035 and hym.read() > 900:
         relehym.value(1)
     else:
         relehym.value(0)
